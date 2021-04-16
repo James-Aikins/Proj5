@@ -6,7 +6,7 @@
                                                    android:layout_height="match_parent">
 
     <TextView
-            android:text="Order Coffee"
+            android:text="@string/order_coffee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/textView4"
             android:textSize="30sp" android:layout_marginBottom="68dp"
@@ -19,51 +19,54 @@
             android:layout_marginEnd="32dp" android:layout_marginRight="32dp"
             app:layout_constraintEnd_toEndOf="parent"/>
     <Button
-            android:text="Confirm Order"
+            android:text="@string/confirm_order"
             android:layout_width="100dp"
             android:layout_height="wrap_content" android:id="@+id/orderCoffee"
             android:layout_marginEnd="48dp"
             android:layout_marginRight="48dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="40dp" app:layout_constraintTop_toBottomOf="@+id/coffeeList"/>
+            android:layout_marginTop="28dp" app:layout_constraintTop_toBottomOf="@+id/coffeeList"
+            app:layout_constraintBottom_toBottomOf="@+id/addCoffee"/>
     <TextView
-            android:text="Quantity"
+            android:text="@string/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/whippedCream"
             android:layout_marginTop="16dp" app:layout_constraintEnd_toStartOf="@+id/coffeeList"
-            android:layout_marginEnd="104dp" android:layout_marginRight="104dp"/>
+            android:layout_marginEnd="104dp" android:layout_marginRight="104dp"
+            app:layout_constraintStart_toStartOf="@+id/numCoffees"/>
     <TextView
-            android:text="Size"
+            android:text="@string/size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/textView6"
             app:layout_constraintBottom_toTopOf="@+id/sizeSpinner" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="20dp" android:layout_marginStart="20dp"/>
     <CheckBox
-            android:text="Sugar"
+            android:text="@string/sugar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/sugar"
             android:layout_marginTop="4dp"
             app:layout_constraintTop_toBottomOf="@+id/cream" app:layout_constraintEnd_toStartOf="@id/coffeeList"
-            android:layout_marginEnd="88dp" android:layout_marginRight="88dp"/>
+            android:layout_marginEnd="88dp" android:layout_marginRight="88dp"
+            app:layout_constraintStart_toStartOf="@+id/cream"/>
     <CheckBox
-            android:text="Cream"
+            android:text="@string/cream"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/cream"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             app:layout_constraintTop_toBottomOf="@+id/sizeSpinner" app:layout_constraintEnd_toStartOf="@id/coffeeList"
             android:layout_marginEnd="84dp" android:layout_marginRight="84dp"/>
     <Button
-            android:text="Add Coffee"
+            android:text="@string/add_coffee"
             android:layout_width="100dp"
             android:layout_height="wrap_content" android:id="@+id/addCoffee"
-            android:layout_marginTop="44dp"
-            app:layout_constraintTop_toBottomOf="@+id/numCoffees" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="20dp" android:layout_marginStart="20dp"/>
+            android:layout_marginTop="36dp"
+            app:layout_constraintTop_toBottomOf="@+id/numCoffees" app:layout_constraintStart_toStartOf="@+id/numCoffees"
+    />
     <Spinner
             android:layout_width="57dp"
             android:layout_height="25dp" android:id="@+id/numCoffees"
             app:layout_constraintTop_toBottomOf="@+id/textView5" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="16dp" android:layout_marginStart="16dp" android:layout_marginTop="8dp"/>
+            android:layout_marginLeft="12dp" android:layout_marginStart="12dp" android:layout_marginTop="8dp"/>
     <Spinner
             android:layout_width="134dp"
             android:layout_height="0dp" android:id="@+id/sizeSpinner"
@@ -71,10 +74,28 @@
             android:layout_marginEnd="24dp" android:layout_marginRight="24dp" app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="228dp"/>
     <CheckBox
-            android:text="Whipped Cream"
+            android:text="@string/whipped_cream"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/whippedCream"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintTop_toBottomOf="@+id/sugar" app:layout_constraintEnd_toStartOf="@id/coffeeList"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"/>
+            android:layout_marginEnd="24dp" android:layout_marginRight="24dp"
+            app:layout_constraintStart_toStartOf="@+id/sugar"/>
+    <TextView
+            android:text="@string/subtotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/subtotalText"
+            app:layout_constraintTop_toBottomOf="@+id/addCoffee"
+            android:layout_marginTop="40dp" app:layout_constraintStart_toStartOf="@+id/addCoffee"
+            android:layout_marginLeft="4dp" android:layout_marginStart="4dp"/>
+    <EditText
+            android:layout_width="122dp"
+            android:layout_height="25dp"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editTextNumber"
+            app:layout_constraintStart_toEndOf="@+id/subtotalText" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="124dp" app:layout_constraintTop_toTopOf="@+id/subtotalText"
+            app:layout_constraintVertical_bias="0.0"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

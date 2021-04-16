@@ -2,4 +2,15 @@
     <string name="app_name">Proj5</string>
     <string name="donut_shop">Donut Shop</string>
     <string name="current_order">Current Order</string>
+    <string name="order_coffee">Order Coffee</string>
+    <string name="confirm_order">Confirm Order</string>
+    <string name="quantity">Quantity</string>
+    <string name="size">Size</string>
+    <string name="sugar">Sugar</string>
+    <string name="add_coffee">Add Coffee</string>
+    <string name="whipped_cream">Whipped Cream</string>
+    <string name="cream">Cream</string>
+    <string name="subtotal">SubTotal</string>
+    <string name="store_order">Store Order</string>
+    <string name="order_donuts">Order Donuts</string>
 </resources>
