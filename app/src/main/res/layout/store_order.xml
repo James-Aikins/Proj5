@@ -19,8 +19,8 @@
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="152dp"
             android:layout_marginStart="152dp"/>
     <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" app:srcCompat="@drawable/abc_vector_test"
+            android:layout_width="80dp"
+            android:layout_height="61dp" app:srcCompat="@drawable/abc_vector_test"
             android:id="@+id/back" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
