@@ -1,18 +1,35 @@
 package app;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Order  {
-    /*
+import java.util.ArrayList;
+
+public class Order implements Customizable, Parcelable {
+
     private int orderNumber;
     private static int nextNum = 1;
     private double totalPrice;
-    private ObservableList<MenuItem> itemList;
+    private ArrayList<MenuItem> itemList;
 
     public Order() {
-        itemList = FXCollections.observableArrayList();
+        itemList = new ArrayList<MenuItem>();
     }
 
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Order createFromParcel(Parcel in){
+            return new Order();
+        }
+        public Order[] newArray(int size){
+            return new Order[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
     @Override
     public boolean add(Object obj) {
         if (obj instanceof MenuItem) {
@@ -38,10 +55,16 @@ public class Order  {
     }
 
 
-    public ObservableList<MenuItem> getList() {
+    public ArrayList<MenuItem> getList() {
         return itemList;
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags){
+        dest.writeInt(orderNumber);
+        dest.writeDouble(totalPrice);
+        dest.writeValue(itemList);
+    }
     public String toString() {
         return Integer.toString(orderNumber);
     }
@@ -53,7 +76,7 @@ public class Order  {
 
     public void setPrice(double price) {
         totalPrice = price;
-    }*/
+    }
 }
 
 
