@@ -1,8 +1,10 @@
 package com.example.proj5;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import app.Donut;
 
@@ -14,6 +16,7 @@ public class DonutActivity extends AppCompatActivity {
     private Spinner quantSpinner;
     private ListView donutsList;
     private Button addDonuts;
+
     ArrayAdapter donutsAdapter;
     private ArrayList<Donut> donuts;
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +41,52 @@ public class DonutActivity extends AppCompatActivity {
         });
 
 
+
+        donutsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object listItem = donutsList.getItemAtPosition(position);
+                removeDonut(listItem);
+            }
+        });
+
     }
 
     public void orderDonut(){
-        String flavor = (String)flavorsList.getSelectedItem();
 
+        String flavor = (String)flavorsList.getSelectedItem();
         int quantity = Integer.parseInt((String)quantSpinner.getSelectedItem());
 
         Donut donut = new Donut(quantity,flavor);
+        for(Donut d:donuts){
+            if(d.getFlavor()==donut.getFlavor()){
+                d.setQuantity(d.getQuantity()+quantity);
+                donutsAdapter.notifyDataSetChanged();
+                return;
+
+            }
+        }
         donuts.add(donut);
         donutsAdapter.notifyDataSetChanged();
+    }
+
+    public void removeDonut(final Object selected){
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setMessage("Do you want to remove this item?").setTitle("");
+        alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                donuts.remove(selected);
+                donutsAdapter.notifyDataSetChanged();
+
+            }
+        });
+        alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
     }
 }
