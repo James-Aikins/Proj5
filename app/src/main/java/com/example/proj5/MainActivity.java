@@ -22,5 +22,31 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(donutView);
             }
         });
+        final Intent coffeeView = new Intent(this,CoffeeActivity.class);
+        final Button openCoffee = findViewById(R.id.openCoffee);
+        openCoffee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(coffeeView);
+            }
+        });
+
+        final Intent currView = new Intent(this,CurrOrderActivity.class);
+        final Button openCurrOrder = findViewById(R.id.openCurr);
+        openCurrOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(currView);
+            }
+        });
+
+        final Intent storeOrderView = new Intent(this,StoreOrderActivity.class);
+        final Button openStoreOrder = findViewById(R.id.openStoreOrder);
+        openStoreOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(storeOrderView);
+            }
+        });
     }
 }

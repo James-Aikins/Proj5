@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="flavors">
+        <item>Traditional</item>
+        <item>Jelly</item>
+        <item>Glazed</item>
+        <item>Chocolate Glazed</item>
+        <item>Boston Cream</item>
+    </string-array>
+
+</resources>

@@ -13,4 +13,6 @@
     <string name="subtotal">SubTotal</string>
     <string name="store_order">Store Order</string>
     <string name="order_donuts">Order Donuts</string>
+    <string name="add_donuts">Add Donuts</string>
+    <string name="remove_donut">Remove Donut</string>
 </resources>
