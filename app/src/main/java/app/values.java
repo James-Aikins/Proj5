@@ -20,5 +20,6 @@ public final class values {
     public static final int SUGAR = 1;
     public static final int WHIPPED_CREAM = 2;
     public static final double TAXRATE = 0.06625;
+    public static final double ADD_ON_PRICE = .2;
 
 }

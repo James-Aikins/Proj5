@@ -85,9 +85,9 @@
             android:layout_marginBottom="124dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="60dp" android:layout_marginStart="60dp"/>
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/subtotalNum"
+            android:layout_width="51dp"
+            android:layout_height="22dp" android:id="@+id/subtotalNum"
             app:layout_constraintStart_toEndOf="@+id/subtotalText" android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp" app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="124dp"/>
+            android:layout_marginBottom="124dp" android:text="@string/dollars"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

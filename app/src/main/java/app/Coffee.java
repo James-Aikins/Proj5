@@ -14,7 +14,7 @@ public class Coffee extends MenuItem implements Customizable{
 
 
     public Coffee(){
-        addOns = new Boolean[]{false,false,false,false,false};
+        addOns = new Boolean[]{false,false,false};
         //this.size=size;
         //this.quantity=quantity;
         //setPrice(itemPrice());
@@ -45,7 +45,7 @@ public class Coffee extends MenuItem implements Customizable{
         for(int i = 0;i<ADDONS_NUM;i++){
 
             if(addOns[i]){
-                total+=0.2;
+                total+=ADD_ON_PRICE;
             }
         }
         return total;
@@ -62,7 +62,7 @@ public class Coffee extends MenuItem implements Customizable{
     }
 
     public String toString(){
-        String addOnStr[] = {"Cream","Syrup","Milk","Caramel","Whipped Cream"};
+        String addOnStr[] = {"Cream","Sugar","Whipped Cream"};
         String str = "";
         str+= getQuantity() + " ";
         str+= (size + " ");
@@ -92,6 +92,9 @@ public class Coffee extends MenuItem implements Customizable{
             }
         }
         return true;
+    }
+    public boolean getAddon(int pos){
+        return addOns[pos];
     }
 
    public void swapAddOn(int add){

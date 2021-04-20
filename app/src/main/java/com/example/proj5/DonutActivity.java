@@ -9,7 +9,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import app.Donut;
 import app.Order;
-import app.*;
+import java.text.DecimalFormat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +21,8 @@ public class DonutActivity extends AppCompatActivity {
     private Button addDonuts;
     private Button confirmOrder;
     private Order donutOrder;
+    private TextView subtotalNum;
+    private static DecimalFormat df = new DecimalFormat("#.##");
 
     ArrayAdapter donutsAdapter;
     private ArrayList<Donut> donuts;
@@ -30,7 +32,7 @@ public class DonutActivity extends AppCompatActivity {
 
         flavorsList = findViewById(R.id.flavorList);
         quantSpinner = findViewById(R.id.quantSpinner);
-
+        subtotalNum = findViewById(R.id.donutSubtotal);
         donutOrder = new Order();
         donuts = new ArrayList();
         donutsList = findViewById(R.id.donutList);
@@ -69,27 +71,33 @@ public class DonutActivity extends AppCompatActivity {
 
         String flavor = (String)flavorsList.getSelectedItem();
         int quantity = Integer.parseInt((String)quantSpinner.getSelectedItem());
-
+        double newSubtotal;
         Donut donut = new Donut(quantity,flavor);
         for(Donut d:donuts){
             if(d.getFlavor()==donut.getFlavor()){
                 d.setQuantity(d.getQuantity()+quantity);
+                newSubtotal = (Double.parseDouble((String) subtotalNum.getText())) + (donut.getPrice()*quantity);
+                subtotalNum.setText(df.format(newSubtotal));
                 donutsAdapter.notifyDataSetChanged();
                 return;
 
             }
         }
         donuts.add(donut);
+        newSubtotal = (Double.parseDouble((String) subtotalNum.getText())) + (donut.getPrice()*quantity);
+        subtotalNum.setText(df.format(newSubtotal));
         donutsAdapter.notifyDataSetChanged();
     }
 
     public void removeDonut(final Object selected){
-
+        final Donut newDonut = (Donut) selected;
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setMessage("Do you want to remove this item?").setTitle("");
         alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 donuts.remove(selected);
+                double newSubtotal = (Double.parseDouble((String) subtotalNum.getText())) - (newDonut.getPrice()*newDonut.getQuantity());
+                subtotalNum.setText(df.format(newSubtotal));
                 donutsAdapter.notifyDataSetChanged();
 
             }
