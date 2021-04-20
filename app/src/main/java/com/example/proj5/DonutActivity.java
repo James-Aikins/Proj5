@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import app.Donut;
+import app.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;

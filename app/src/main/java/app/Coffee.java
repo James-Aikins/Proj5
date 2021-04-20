@@ -4,7 +4,7 @@ import static app.values.*;
 
 public class Coffee extends MenuItem implements Customizable{
 
-    //cream, syrup, milk, caramel,whippedCream
+    //cream, sugar, whipped cream
     private Boolean[] addOns;
     private String size;
     /**
@@ -42,7 +42,7 @@ public class Coffee extends MenuItem implements Customizable{
             total=ventiPrice;
         }
 
-        for(int i = 0;i<addOnsNum;i++){
+        for(int i = 0;i<ADDONS_NUM;i++){
 
             if(addOns[i]){
                 total+=0.2;
@@ -86,13 +86,17 @@ public class Coffee extends MenuItem implements Customizable{
 
 
     public boolean equalAddOns(Coffee c){
-        for(int i=0; i<addOnsNum;i++){
+        for(int i=0; i<ADDONS_NUM;i++){
             if(addOns[i] != c.addOns[i]){
                 return false;
             }
         }
         return true;
     }
+
+   public void swapAddOn(int add){
+        addOns[add] = !addOns[add];
+   }
 
 
 
