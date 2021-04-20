@@ -1,11 +1,14 @@
 package com.example.proj5;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import app.Donut;
+import app.Order;
 import app.*;
 
 import java.util.ArrayList;
@@ -16,6 +19,8 @@ public class DonutActivity extends AppCompatActivity {
     private Spinner quantSpinner;
     private ListView donutsList;
     private Button addDonuts;
+    private Button confirmOrder;
+    private Order donutOrder;
 
     ArrayAdapter donutsAdapter;
     private ArrayList<Donut> donuts;
@@ -26,6 +31,7 @@ public class DonutActivity extends AppCompatActivity {
         flavorsList = findViewById(R.id.flavorList);
         quantSpinner = findViewById(R.id.quantSpinner);
 
+        donutOrder = new Order();
         donuts = new ArrayList();
         donutsList = findViewById(R.id.donutList);
         donutsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, donuts);
@@ -50,6 +56,13 @@ public class DonutActivity extends AppCompatActivity {
             }
         });
 
+        confirmOrder = findViewById(R.id.orderDonuts);
+        confirmOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                orderDonut();
+            }
+        });
     }
 
     public void orderDonut(){
@@ -88,5 +101,19 @@ public class DonutActivity extends AppCompatActivity {
         });
         AlertDialog dialog = alert.create();
         dialog.show();
+    }
+
+    public void orderDonuts(){
+        for(Donut d: donuts){
+            donutOrder.add(d);
+        }
+        Intent intent = new Intent();
+        intent.putExtra("donutOrder",donutOrder);
+        setResult(RESULT_OK,intent);
+    }
+
+    public void onStop() {
+        super.onStop();
+        Intent intent = new  Intent();
     }
 }
