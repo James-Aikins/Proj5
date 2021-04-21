@@ -1,5 +1,6 @@
 package com.example.proj5;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -92,6 +93,21 @@ public class CurrOrderActivity extends AppCompatActivity {
     }
 
     public void confirmOrder(){
+        Context context = getApplicationContext();
+        CharSequence text;
+        Toast toast;
+        int duration = Toast.LENGTH_SHORT;
+
+        if(currOrder.isEmpty()){
+            text = "Please add items before ordering";
+            toast = Toast.makeText(context,text,duration);
+            toast.show();
+            return;
+        }
+
+        text = "You have ordered successfully";
+        toast = Toast.makeText(context,text,duration);
+        toast.show();
         Intent intent = new Intent();
         intent.putExtra("order",currOrder);
         setResult(RESULT_OK,intent);

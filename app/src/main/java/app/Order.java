@@ -97,6 +97,17 @@ public class Order implements Customizable, Serializable {
     public int getOrderNumber(){
         return orderNumber;
     }
+
+    /**
+     * checks if an order is empty
+     * @return true if empty false otherwise
+     */
+    public boolean isEmpty(){
+        if(itemList.isEmpty()){
+            return true;
+        }
+        return false;
+    }
 }
 
 
