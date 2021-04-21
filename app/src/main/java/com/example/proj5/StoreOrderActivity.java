@@ -86,9 +86,10 @@ public class StoreOrderActivity extends AppCompatActivity implements Serializabl
             public void onClick(DialogInterface dialog, int which) {
                 storeOrders.remove(selected);
                 adapter.notifyDataSetChanged();
-                itemList = new ArrayList<>();
+                itemList.clear();
                 orderAdapter.notifyDataSetChanged();
                 orderNumber.setText(R.string.autofill);
+                subtotal.setText(R.string.autofill);
             }
         });
         alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
