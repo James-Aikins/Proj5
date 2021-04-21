@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         openStoreOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                storeOrderView.putExtra("storeOrders", storeOrders);
-                startActivity(storeOrderView);
+                storeOrderView.putExtra("storeOrders",storeOrders);
+                startActivityForResult(storeOrderView,4);
             }
         });
 
@@ -64,10 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param data
+     * Recieves the data provided by closed events and updates values accordingly
      */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -89,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK){
                 Order placedOrder = (Order)data.getSerializableExtra("order");
                 storeOrders.add(placedOrder);
+                currOrder = new Order();
+            }
+        } else if(requestCode == 4){
+            if(resultCode == RESULT_OK){
+                storeOrders = (StoreOrders) data.getSerializableExtra("storeOrder");
             }
         }
     }

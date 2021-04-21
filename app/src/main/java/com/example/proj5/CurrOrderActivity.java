@@ -62,6 +62,10 @@ public class CurrOrderActivity extends AppCompatActivity {
         updateCost();
 
     }
+
+    /**
+     * Recalculates the cost values and updates the subtotal tax and total TextFields with the new data
+     */
     public void updateCost(){
         subTotalPrice = currOrder.totalPrice();
         taxPrice = subTotalPrice * values.TAXRATE;
@@ -71,6 +75,11 @@ public class CurrOrderActivity extends AppCompatActivity {
         tax.setText(String.format("%,.2f",taxPrice));
         total.setText(String.format(("%,.2f"),totalPrice));
     }
+
+    /**
+     * Removes the selected item from the list of menu items
+     * @param selected
+     */
     public void removeItem(final Object selected){
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -92,6 +101,9 @@ public class CurrOrderActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * Puts the confirmed order onto the activity intent
+     */
     public void confirmOrder(){
         Context context = getApplicationContext();
         CharSequence text;

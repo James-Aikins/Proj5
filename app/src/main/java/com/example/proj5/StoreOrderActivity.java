@@ -65,6 +65,10 @@ public class StoreOrderActivity extends AppCompatActivity implements Serializabl
 
     }
 
+    /**
+     * Fills the Order Details section with the information of the selected order
+     * @param selected The selected item
+     */
     private void selectOrder(Order selected){
         itemList = selected.getList();
         orderAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,itemList);
@@ -77,6 +81,11 @@ public class StoreOrderActivity extends AppCompatActivity implements Serializabl
 
 
     }
+
+    /**
+     * Removes the selected order from the store orders list
+     * @param selected The selected item being deleted
+     */
     private void removeOrder(final Order selected){
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -84,11 +93,18 @@ public class StoreOrderActivity extends AppCompatActivity implements Serializabl
         alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 storeOrders.remove(selected);
+
+                //Clears all fields in the Order Details section
                 adapter.notifyDataSetChanged();
                 itemList.clear();
                 orderAdapter.notifyDataSetChanged();
                 orderNumber.setText(R.string.autofill);
                 subtotal.setText(R.string.autofill);
+
+                //Modifies the intent
+                Intent intent = new Intent();
+                intent.putExtra("storeOrder",storeOrders);
+                setResult(-1,intent);
             }
         });
         alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -100,4 +116,12 @@ public class StoreOrderActivity extends AppCompatActivity implements Serializabl
         dialog.show();
     }
 
+    /*
+    @Override
+    protected void onStop() {
+        Intent intent = new Intent();
+        intent.putExtra("storeOrder",storeOrders);
+        setResult(-1,intent);
+        super.onStop();
+    }*/
 }
