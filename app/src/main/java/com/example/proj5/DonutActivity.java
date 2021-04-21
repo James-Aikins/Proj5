@@ -1,5 +1,6 @@
 package com.example.proj5;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -118,6 +119,16 @@ public class DonutActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra("donutOrder",donutOrder);
         setResult(RESULT_OK,intent);
+
+        Context context = getApplicationContext();
+        CharSequence text = "You have ordered successfully";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context,text,duration);
+        toast.show();
+
+        subtotalNum.setText("0.00");
+        donuts.clear();
+        donutsAdapter.notifyDataSetChanged();
     }
 
 }
