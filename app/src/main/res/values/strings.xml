@@ -11,7 +11,7 @@
     <string name="whipped_cream">Whipped Cream</string>
     <string name="cream">Cream</string>
     <string name="subtotal">SubTotal</string>
-    <string name="store_order">Store Order</string>
+    <string name="store_order">Store Orders</string>
     <string name="order_donuts">Order Donuts</string>
     <string name="add_donuts">Add Donuts</string>
     <string name="remove_donut">Remove Donut</string>
@@ -22,4 +22,7 @@
     <string name="curr_activity_name">Your Current Order</string>
     <string name="dollars">0.00</string>
     <string name="place_order">Place Order</string>
+    <string name="remove_order">Remove Order</string>
+    <string name="order_details">Order Details</string>
+    <string name="order_number">Order Number</string>
 </resources>

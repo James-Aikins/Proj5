@@ -1,9 +1,10 @@
 package app;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StoreOrders implements Customizable{
+public class StoreOrders implements Customizable, Serializable {
 
     private ArrayList<Order> orderList;
 

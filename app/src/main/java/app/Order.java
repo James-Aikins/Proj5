@@ -84,6 +84,9 @@ public class Order implements Customizable, Serializable {
     public void setPrice(double price) {
         totalPrice = price;
     }
+    public int getOrderNumber(){
+        return orderNumber;
+    }
 }
 
 

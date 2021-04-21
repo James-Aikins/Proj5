@@ -12,17 +12,9 @@ public class Coffee extends MenuItem implements Customizable, Serializable {
     //cream, sugar, whipped cream
     private Boolean[] addOns;
     private String size;
-    /**
-     * switch quantity to menu item later if time
-     */
-
-
 
     public Coffee(){
         addOns = new Boolean[]{false,false,false};
-        //this.size=size;
-        //this.quantity=quantity;
-        //setPrice(itemPrice());
     }
 
     public Coffee(String size,Boolean[] addOns,int quantity){
