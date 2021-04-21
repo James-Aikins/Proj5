@@ -1,17 +1,14 @@
 package com.example.proj5;
 
 import android.content.Intent;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import app.Donut;
-import app.MenuItem;
-import app.Order;
-import app.StoreOrders;
+import app.*;
 
-import java.util.ArrayList;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
         openCurrOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(currView);
+                currView.putExtra("currOrder",currOrder);
+                startActivityForResult(currView,3);
             }
         });
 
@@ -67,19 +65,22 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if(resultCode == RESULT_OK) {
-                Order donutOrder = data.getParcelableExtra("donutOrder");
-                ArrayList<MenuItem> donutList = donutOrder.getList();
-                for(MenuItem d: donutList){
+                Order donutOrder = (Order)data.getSerializableExtra("donutOrder");
+                for(MenuItem d: donutOrder.getList()){
                     currOrder.add(d);
                 }
             }
         }else if(requestCode == 2){
             if(resultCode == RESULT_OK) {
-                Order coffeeOrder = data.getParcelableExtra("coffeeOrder");
-                ArrayList<MenuItem> coffeeList = coffeeOrder.getList();
-                for (MenuItem c: coffeeList){
+                Order coffeeOrder = (Order)data.getSerializableExtra("coffeeOrder");
+                for (MenuItem c: coffeeOrder.getList()){
                     currOrder.add(c);
                 }
+            }
+        }else if(requestCode == 3){
+            if(resultCode == RESULT_OK){
+                Order placedOrder = (Order)data.getSerializableExtra("order");
+                storeOrders.add(placedOrder);
             }
         }
     }

@@ -1,12 +1,13 @@
 package com.example.proj5;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import app.Coffee;
+import app.*;
 import java.util.ArrayList;
 import static app.values.*;
 import java.text.DecimalFormat;
@@ -28,6 +29,7 @@ public class CoffeeActivity extends AppCompatActivity {
 
     ArrayAdapter coffeesAdapter;
     private ArrayList<Coffee> coffees;
+    private Order coffeeOrder;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,7 @@ public class CoffeeActivity extends AppCompatActivity {
 
         subtotalNum = findViewById(R.id.subtotalNum);
 
+        coffeeOrder = new Order();
         coffees = new ArrayList();
         coffeeList = findViewById(R.id.coffeeList);
         coffeesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,coffees);
@@ -61,6 +64,14 @@ public class CoffeeActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object listItem = coffeeList.getItemAtPosition(position);
                 removeCoffee(listItem);
+            }
+        });
+
+        orderCoffee = findViewById(R.id.orderCoffee);
+        orderCoffee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmCoffees();
             }
         });
 
@@ -159,5 +170,14 @@ public class CoffeeActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
+    }
+
+    public void confirmCoffees(){
+        for(Coffee c: coffees){
+            coffeeOrder.add(c);
+        }
+        Intent intent = new Intent();
+        intent.putExtra("coffeeOrder",coffeeOrder);
+        setResult(RESULT_OK,intent);
     }
 }

@@ -1,8 +1,13 @@
 package app;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 import static app.values.*;
 
-public class Coffee extends MenuItem implements Customizable{
+public class Coffee extends MenuItem implements Customizable, Serializable {
 
     //cream, sugar, whipped cream
     private Boolean[] addOns;
@@ -25,6 +30,7 @@ public class Coffee extends MenuItem implements Customizable{
         this.size=size;
         setQuantity(quantity);
     }
+
 
     @Override
     public double getPrice(){

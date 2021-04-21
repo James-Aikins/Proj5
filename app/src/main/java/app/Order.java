@@ -4,9 +4,10 @@ package app;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Order implements Customizable, Parcelable {
+public class Order implements Customizable, Serializable {
 
     private int orderNumber;
     private static int nextNum = 1;
@@ -15,18 +16,25 @@ public class Order implements Customizable, Parcelable {
 
     public Order() {
         itemList = new ArrayList<MenuItem>();
+        setOrderNumber();
+    }
+    public Order(Parcel in){
+        orderNumber = in.readInt();
+        totalPrice = in.readDouble();
+        itemList = new ArrayList<MenuItem>();
+        in.readList(itemList,itemList.getClass().getClassLoader());
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public Order createFromParcel(Parcel in){
-            return new Order();
+            return new Order(in);
         }
         public Order[] newArray(int size){
             return new Order[size];
         }
     };
 
-    @Override
+
     public int describeContents() {
         return 0;
     }
@@ -59,12 +67,11 @@ public class Order implements Customizable, Parcelable {
         return itemList;
     }
 
-    @Override
     public void writeToParcel(Parcel dest, int flags){
         dest.writeInt(orderNumber);
         dest.writeDouble(totalPrice);
-        dest.writeValue(itemList);
     }
+
     public String toString() {
         return Integer.toString(orderNumber);
     }

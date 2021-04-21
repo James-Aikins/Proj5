@@ -12,7 +12,7 @@ import app.Order;
 import java.text.DecimalFormat;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class DonutActivity extends AppCompatActivity {
     private Spinner flavorsList;
@@ -62,7 +62,7 @@ public class DonutActivity extends AppCompatActivity {
         confirmOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                orderDonut();
+                confirmsDonuts();
             }
         });
     }
@@ -111,7 +111,7 @@ public class DonutActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void orderDonuts(){
+    public void confirmsDonuts(){
         for(Donut d: donuts){
             donutOrder.add(d);
         }
@@ -120,8 +120,4 @@ public class DonutActivity extends AppCompatActivity {
         setResult(RESULT_OK,intent);
     }
 
-    public void onStop() {
-        super.onStop();
-        Intent intent = new  Intent();
-    }
 }

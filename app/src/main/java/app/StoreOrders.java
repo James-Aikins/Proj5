@@ -1,18 +1,20 @@
 package app;
 
 
-public class StoreOrders  {
-/*
-    private ObservableList<app.Order> orderList;
+import java.util.ArrayList;
+
+public class StoreOrders implements Customizable{
+
+    private ArrayList<Order> orderList;
 
     public StoreOrders(){
-        orderList = FXCollections.observableArrayList();
+        orderList = new ArrayList<Order>();
     }
 
     @Override
     public boolean add(Object obj){
-        if(obj instanceof App.Order){
-            orderList.add((App.Order)obj);
+        if(obj instanceof Order){
+            orderList.add((Order)obj);
             return true;
         }
         return false;
@@ -20,14 +22,14 @@ public class StoreOrders  {
 
     @Override
     public boolean remove(Object obj) {
-        if(obj instanceof App.Order && orderList.contains((App.Order) obj)){
-            orderList.remove((App.Order) obj);
+        if(obj instanceof Order && orderList.contains((Order) obj)){
+            orderList.remove((Order) obj);
             return true;
         }
         return false;
     }
 
-    public ObservableList<App.Order> getList(){
+    public ArrayList<Order> getList(){
         return orderList;
-    }*/
+    }
 }
