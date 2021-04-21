@@ -1,5 +1,4 @@
 package com.example.proj5;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,7 +13,10 @@ import java.text.DecimalFormat;
 
 import java.util.ArrayList;
 
-
+/**
+ * Controller for the order_donut_view xml
+ * @author James Aikins, Michael Radoian
+ */
 public class DonutActivity extends AppCompatActivity {
     private Spinner flavorsList;
     private Spinner quantSpinner;
@@ -68,6 +70,9 @@ public class DonutActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * adds donuts to pre order list and updates subtotal
+     */
     public void orderDonut(){
 
         String flavor = (String)flavorsList.getSelectedItem();
@@ -75,7 +80,7 @@ public class DonutActivity extends AppCompatActivity {
         double newSubtotal;
         Donut donut = new Donut(quantity,flavor);
         for(Donut d:donuts){
-            if(d.getFlavor()==donut.getFlavor()){
+            if(d.getFlavor() == donut.getFlavor()){
                 d.setQuantity(d.getQuantity()+quantity);
                 newSubtotal = (Double.parseDouble((String) subtotalNum.getText())) + (donut.getPrice()*quantity);
                 subtotalNum.setText(df.format(newSubtotal));
@@ -90,6 +95,10 @@ public class DonutActivity extends AppCompatActivity {
         donutsAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * removes the clicked donut from the pre order list
+     * @param selected the clicked donut
+     */
     public void removeDonut(final Object selected){
         final Donut newDonut = (Donut) selected;
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -97,7 +106,7 @@ public class DonutActivity extends AppCompatActivity {
         alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 donuts.remove(selected);
-                double newSubtotal = (Double.parseDouble((String) subtotalNum.getText())) - (newDonut.getPrice()*newDonut.getQuantity());
+                double newSubtotal = (Double.parseDouble((String) subtotalNum.getText())) - (newDonut.getPrice() * newDonut.getQuantity());
                 subtotalNum.setText(df.format(newSubtotal));
                 donutsAdapter.notifyDataSetChanged();
 
@@ -112,18 +121,30 @@ public class DonutActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * confirms the preorder list and sends it to the current order
+     */
     public void confirmsDonuts(){
-        for(Donut d: donuts){
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast;
+        Context context = getApplicationContext();
+        CharSequence text;
+        if(donuts.isEmpty()) {
+            text = "Please add donuts before ordering";
+            toast = Toast.makeText(context, text, duration);
+            toast.show();
+            return;
+        }
+
+        for(Donut d : donuts){
             donutOrder.add(d);
         }
+
         Intent intent = new Intent();
         intent.putExtra("donutOrder",donutOrder);
         setResult(RESULT_OK,intent);
-
-        Context context = getApplicationContext();
-        CharSequence text = "You have ordered successfully";
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context,text,duration);
+        text = "You have ordered successfully";
+        toast = Toast.makeText(context,text,duration);
         toast.show();
 
         subtotalNum.setText("0.00");

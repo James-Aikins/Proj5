@@ -7,9 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import app.*;
 
-
-
-
+/**
+ * the main menu controller for activity_main.xml
+ * @author James Aikins, Michael Radoian
+ */
 public class MainActivity extends AppCompatActivity {
 
     Order currOrder;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         openStoreOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                storeOrderView.putExtra("storeOrders",storeOrders);
+                storeOrderView.putExtra("storeOrders", storeOrders);
                 startActivity(storeOrderView);
             }
         });
@@ -62,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
         currOrder = new Order();
     }
 
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {

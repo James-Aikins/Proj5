@@ -13,7 +13,10 @@ import java.util.ArrayList;
 import static app.values.*;
 import java.text.DecimalFormat;
 
-
+/**
+ * Coffee view app controller for coffee_order.xml
+ * @author Michael Radoian, James Aikins
+ */
 public class CoffeeActivity extends AppCompatActivity {
 
     private Spinner sizeSpinner;
@@ -78,6 +81,10 @@ public class CoffeeActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * method when order coffee button is pressed
+     * adds a coffee to the pre order list
+     */
     public void orderCoffee(){
         String size = (String) sizeSpinner.getSelectedItem();
         int quantity = Integer.parseInt((String) numCoffees.getSelectedItem());
@@ -98,9 +105,9 @@ public class CoffeeActivity extends AppCompatActivity {
 
         Coffee coffee = new Coffee(size,addOns,quantity);
         for(Coffee c:coffees){
-            if(c.equalAddOns(coffee) && c.getSize()==coffee.getSize()){
+            if(c.equalAddOns(coffee) && c.getSize() == coffee.getSize()){
                 c.setQuantity(c.getQuantity()+quantity);
-                newSubtotal = (Double.parseDouble((String) subtotalNum.getText())) + (coffee.getPrice()*quantity);
+                newSubtotal = (Double.parseDouble((String) subtotalNum.getText())) + (coffee.getPrice() * quantity);
                 coffeesAdapter.notifyDataSetChanged();
                 subtotalNum.setText(df.format(newSubtotal));
                 return;
@@ -112,6 +119,10 @@ public class CoffeeActivity extends AppCompatActivity {
         coffeesAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * removes a coffee or adds/removes add on from the pre ordered list
+     * @param selected pre order coffee that was clicked
+     */
     public void removeCoffee(final Object selected){
         final Coffee newCoffee = (Coffee) selected;
 
@@ -121,13 +132,11 @@ public class CoffeeActivity extends AppCompatActivity {
         builder.setItems(options, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // The 'which' argument contains the index position
-                        // of the selected item
                         double newSubtotal;
                         switch (which) {
                             case 0:
                                 coffees.remove(selected);
-                                newSubtotal = (Double.parseDouble((String) subtotalNum.getText())) - (newCoffee.getPrice()*newCoffee.getQuantity());
+                                newSubtotal = (Double.parseDouble((String) subtotalNum.getText())) - (newCoffee.getPrice() * newCoffee.getQuantity());
                                 subtotalNum.setText(df.format(newSubtotal));
                                 coffeesAdapter.notifyDataSetChanged();
                                 break;
@@ -167,13 +176,28 @@ public class CoffeeActivity extends AppCompatActivity {
                         }
                         coffeesAdapter.notifyDataSetChanged();
                     }
-                });
+        });
         AlertDialog dialog = builder.create();
         dialog.show();
 
     }
 
+    /**
+     * confirms coffee order and sends it to the current order list if the list
+     * isn't empty
+     */
     public void confirmCoffees(){
+        Context context = getApplicationContext();
+        CharSequence text;
+        Toast toast;
+        int duration = Toast.LENGTH_SHORT;
+
+        if(coffees.isEmpty()){
+            text = "Please add coffees before ordering";
+            toast = Toast.makeText(context,text,duration);
+            toast.show();
+            return;
+        }
         for(Coffee c: coffees){
             coffeeOrder.add(c);
         }
@@ -181,10 +205,9 @@ public class CoffeeActivity extends AppCompatActivity {
         intent.putExtra("coffeeOrder",coffeeOrder);
         setResult(RESULT_OK,intent);
 
-        Context context = getApplicationContext();
-        CharSequence text = "You have ordered successfully";
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context,text,duration);
+
+        text = "You have ordered successfully";
+        toast = Toast.makeText(context,text,duration);
         toast.show();
 
         subtotalNum.setText("0.00");

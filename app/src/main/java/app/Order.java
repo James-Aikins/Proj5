@@ -1,12 +1,12 @@
 package app;
-
-
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * order class the keeps track of all the
+ * menu items in the current order
+ * @author James Aikins, Michael Radoian
+ */
 public class Order implements Customizable, Serializable {
 
     private int orderNumber;
@@ -14,30 +14,20 @@ public class Order implements Customizable, Serializable {
     private double totalPrice;
     private ArrayList<MenuItem> itemList;
 
+    /**
+     * defualt order contructor that sets
+     * the order to a blank list
+     */
     public Order() {
         itemList = new ArrayList<MenuItem>();
         setOrderNumber();
     }
-    public Order(Parcel in){
-        orderNumber = in.readInt();
-        totalPrice = in.readDouble();
-        itemList = new ArrayList<MenuItem>();
-        in.readList(itemList,itemList.getClass().getClassLoader());
-    }
 
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public Order createFromParcel(Parcel in){
-            return new Order(in);
-        }
-        public Order[] newArray(int size){
-            return new Order[size];
-        }
-    };
-
-
-    public int describeContents() {
-        return 0;
-    }
+    /**
+     * adds a menu item to the order list
+     * @param obj object to add to the list
+     * @return if obj is a menu item true and false otherwise
+     */
     @Override
     public boolean add(Object obj) {
         if (obj instanceof MenuItem) {
@@ -48,6 +38,12 @@ public class Order implements Customizable, Serializable {
         return false;
     }
 
+    /**
+     * removes a obj from the order list
+     * @param obj desired removed object
+     * @return true if the obj is a menu item and in the
+     * list and false otherwise
+     */
     @Override
     public boolean remove(Object obj) {
         if (obj instanceof MenuItem && itemList.contains((MenuItem) obj)) {
@@ -58,29 +54,43 @@ public class Order implements Customizable, Serializable {
         return false;
     }
 
+    /**
+     * returns the total price of the order
+     * @return total price
+     */
     public double totalPrice() {
         return totalPrice;
     }
 
-
+    /**
+     * returns the list of menu items in the list
+     * @return arraylist of menu items
+     */
     public ArrayList<MenuItem> getList() {
         return itemList;
     }
 
-    public void writeToParcel(Parcel dest, int flags){
-        dest.writeInt(orderNumber);
-        dest.writeDouble(totalPrice);
-    }
-
+    /**
+     * converts the order number as a string
+     * @return order number string
+     */
     public String toString() {
         return Integer.toString(orderNumber);
     }
 
+
+    /**
+     * sets the order to the next num available number the
+     * increments by 1 each order
+     */
     public void setOrderNumber() {
         orderNumber = nextNum;
         nextNum++;
     }
-
+    /**
+     * sets the total price of the order
+     * @param price desired price
+     */
     public void setPrice(double price) {
         totalPrice = price;
     }
