@@ -117,6 +117,12 @@ public class CurrOrderActivity extends AppCompatActivity {
             return;
         }
 
+        currOrder.clear();
+        subtotal.setText("0.00");
+        total.setText("0.00");
+        tax.setText("0.00");
+        adapter.notifyDataSetChanged();
+
         text = "You have ordered successfully";
         toast = Toast.makeText(context,text,duration);
         toast.show();
