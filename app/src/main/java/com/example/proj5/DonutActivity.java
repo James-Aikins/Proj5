@@ -21,11 +21,9 @@ public class DonutActivity extends AppCompatActivity {
     private Spinner flavorsList;
     private Spinner quantSpinner;
     private ListView donutsList;
-    private Button addDonuts;
-    private Button confirmOrder;
     private Order donutOrder;
     private TextView subtotalNum;
-    private static DecimalFormat df = new DecimalFormat("#.##");
+    private static final DecimalFormat df = new DecimalFormat("#.##");
 
     ArrayAdapter donutsAdapter;
     private ArrayList<Donut> donuts;
@@ -37,13 +35,13 @@ public class DonutActivity extends AppCompatActivity {
         quantSpinner = findViewById(R.id.quantSpinner);
         subtotalNum = findViewById(R.id.donutSubtotal);
         donutOrder = new Order();
-        donuts = new ArrayList();
+        donuts = new ArrayList<>();
         donutsList = findViewById(R.id.donutList);
         donutsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, donuts);
 
         donutsList.setAdapter(donutsAdapter);
 
-        addDonuts = findViewById(R.id.addDonuts);
+        Button addDonuts = findViewById(R.id.addDonuts);
         addDonuts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +59,7 @@ public class DonutActivity extends AppCompatActivity {
             }
         });
 
-        confirmOrder = findViewById(R.id.orderDonuts);
+        Button confirmOrder = findViewById(R.id.orderDonuts);
         confirmOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -80,7 +78,7 @@ public class DonutActivity extends AppCompatActivity {
         double newSubtotal;
         Donut donut = new Donut(quantity,flavor);
         for(Donut d:donuts){
-            if(d.getFlavor() == donut.getFlavor()){
+            if(d.getFlavor().equals(donut.getFlavor())){
                 d.setQuantity(d.getQuantity()+quantity);
                 newSubtotal = (Double.parseDouble((String) subtotalNum.getText())) + (donut.getPrice()*quantity);
                 subtotalNum.setText(df.format(newSubtotal));
@@ -147,7 +145,7 @@ public class DonutActivity extends AppCompatActivity {
         toast = Toast.makeText(context,text,duration);
         toast.show();
 
-        subtotalNum.setText("0.00");
+        subtotalNum.setText(R.string.autofill);
         donuts.clear();
         donutsAdapter.notifyDataSetChanged();
     }

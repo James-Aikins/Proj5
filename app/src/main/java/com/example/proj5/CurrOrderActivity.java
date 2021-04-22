@@ -10,12 +10,15 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import app.*;
 
+/**
+ * Controller for the Current Order page
+ * @author James Aikins, Michael Radoian
+ */
 public class CurrOrderActivity extends AppCompatActivity {
     private ListView orderList;
     private TextView subtotal;
     private TextView tax;
     private TextView total;
-    private Button placeOrder;
 
     private Order currOrder;
 
@@ -35,7 +38,7 @@ public class CurrOrderActivity extends AppCompatActivity {
         tax = findViewById(R.id.taxNumber);
         total = findViewById(R.id.totalNumber);
 
-        placeOrder = findViewById(R.id.placeOrder);
+        Button placeOrder = findViewById(R.id.placeOrder);
         placeOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +81,7 @@ public class CurrOrderActivity extends AppCompatActivity {
 
     /**
      * Removes the selected item from the list of menu items
-     * @param selected
+     * @param selected The item
      */
     public void removeItem(final Object selected){
 

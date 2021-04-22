@@ -14,14 +14,16 @@ import app.values;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Controller for the Store Order page
+ * @author James Aikins, Michael Radoian
+ */
 public class StoreOrderActivity extends AppCompatActivity implements Serializable {
 
-    private ListView orderList;
     private ListView orderItems;
     private TextView orderNumber;
     private TextView subtotal;
     private StoreOrders storeOrders;
-    private Button removeOrder;
 
     private ArrayAdapter adapter;
     private ArrayAdapter orderAdapter;
@@ -39,16 +41,17 @@ public class StoreOrderActivity extends AppCompatActivity implements Serializabl
         orderNumber = findViewById(R.id.orderNumber);
         subtotal = findViewById(R.id.subtotalStoreOrder);
 
-        removeOrder = findViewById(R.id.removeOrder);
+        Button removeOrder = findViewById(R.id.removeOrder);
         removeOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                removeOrder(selected);
-
+                if(selected != null) {
+                    removeOrder(selected);
+                }
             }
         });
 
-        orderList = findViewById(R.id.storeOrderList);
+        ListView orderList = findViewById(R.id.storeOrderList);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,storeOrders.getList());
         orderList.setAdapter(adapter);
         orderItems = findViewById(R.id.orderItems);
@@ -104,7 +107,7 @@ public class StoreOrderActivity extends AppCompatActivity implements Serializabl
                 //Modifies the intent
                 Intent intent = new Intent();
                 intent.putExtra("storeOrder",storeOrders);
-                setResult(-1,intent);
+                setResult(RESULT_OK,intent);
             }
         });
         alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -115,13 +118,4 @@ public class StoreOrderActivity extends AppCompatActivity implements Serializabl
         AlertDialog dialog = alert.create();
         dialog.show();
     }
-
-    /*
-    @Override
-    protected void onStop() {
-        Intent intent = new Intent();
-        intent.putExtra("storeOrder",storeOrders);
-        setResult(-1,intent);
-        super.onStop();
-    }*/
 }

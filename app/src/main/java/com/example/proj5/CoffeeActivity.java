@@ -21,14 +21,12 @@ public class CoffeeActivity extends AppCompatActivity {
 
     private Spinner sizeSpinner;
     private Spinner numCoffees;
-    private Button addCoffee;
-    private Button orderCoffee;
     private TextView subtotalNum;
     private ListView coffeeList;
     private CheckBox cream;
     private CheckBox sugar;
     private CheckBox whippedCream;
-    private static DecimalFormat df = new DecimalFormat("#.##");
+    private static final DecimalFormat df = new DecimalFormat("#.##");
 
 
     ArrayAdapter coffeesAdapter;
@@ -45,13 +43,13 @@ public class CoffeeActivity extends AppCompatActivity {
         subtotalNum = findViewById(R.id.subtotalNum);
 
         coffeeOrder = new Order();
-        coffees = new ArrayList();
+        coffees = new ArrayList<>();
         coffeeList = findViewById(R.id.coffeeList);
         coffeesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,coffees);
 
         coffeeList.setAdapter(coffeesAdapter);
 
-        addCoffee = findViewById(R.id.addCoffee);
+        Button addCoffee = findViewById(R.id.addCoffee);
         addCoffee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +69,7 @@ public class CoffeeActivity extends AppCompatActivity {
             }
         });
 
-        orderCoffee = findViewById(R.id.orderCoffee);
+        Button orderCoffee = findViewById(R.id.orderCoffee);
         orderCoffee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,22 +88,20 @@ public class CoffeeActivity extends AppCompatActivity {
         int quantity = Integer.parseInt((String) numCoffees.getSelectedItem());
         Boolean[] addOns = {false,false,false};
         double newSubtotal;
-        if(cream.isChecked())
-            addOns[CREAM] = true;
-        else
-            addOns[CREAM] = false;
-        if(sugar.isChecked())
+        addOns[CREAM] = cream.isChecked();
+        if(sugar.isChecked()) {
             addOns[SUGAR] = true;
-        else
+        }else {
             addOns[SUGAR] = false;
-        if(whippedCream.isChecked())
+        }if(whippedCream.isChecked()) {
             addOns[WHIPPED_CREAM] = true;
-        else
+        }else {
             addOns[WHIPPED_CREAM] = false;
+        }
 
         Coffee coffee = new Coffee(size,addOns,quantity);
         for(Coffee c:coffees){
-            if(c.equalAddOns(coffee) && c.getSize() == coffee.getSize()){
+            if(c.equalAddOns(coffee) && c.getSize().equals(coffee.getSize())){
                 c.setQuantity(c.getQuantity()+quantity);
                 newSubtotal = (Double.parseDouble((String) subtotalNum.getText())) + (coffee.getPrice() * quantity);
                 coffeesAdapter.notifyDataSetChanged();
@@ -210,7 +206,7 @@ public class CoffeeActivity extends AppCompatActivity {
         toast = Toast.makeText(context,text,duration);
         toast.show();
 
-        subtotalNum.setText("0.00");
+        subtotalNum.setText(R.string.autofill);
         coffees.clear();
         coffeesAdapter.notifyDataSetChanged();
     }

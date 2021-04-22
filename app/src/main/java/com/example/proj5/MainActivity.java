@@ -13,8 +13,14 @@ import app.*;
  */
 public class MainActivity extends AppCompatActivity {
 
-    Order currOrder;
-    StoreOrders storeOrders;
+    private Order currOrder;
+    private StoreOrders storeOrders;
+
+    private final int DONUT_REQUEST = 1;
+    private final int COFFEE_REQUEST = 2;
+    private final int CURR_REQUEST = 3;
+    private final int STORE_REQUEST = 4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         currOrder = new Order();
@@ -27,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         openDonuts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(donutView,1);
+                startActivityForResult(donutView,DONUT_REQUEST);
             }
         });
 
@@ -36,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         openCoffee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(coffeeView,2);
+                startActivityForResult(coffeeView,COFFEE_REQUEST);
             }
         });
 
@@ -46,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 currView.putExtra("currOrder",currOrder);
-                startActivityForResult(currView,3);
+                startActivityForResult(currView,CURR_REQUEST);
             }
         });
 
@@ -56,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 storeOrderView.putExtra("storeOrders",storeOrders);
-                startActivityForResult(storeOrderView,4);
+                startActivityForResult(storeOrderView,STORE_REQUEST);
             }
         });
 
@@ -68,27 +74,27 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
+        if (requestCode == DONUT_REQUEST) {
             if(resultCode == RESULT_OK) {
                 Order donutOrder = (Order)data.getSerializableExtra("donutOrder");
                 for(MenuItem d: donutOrder.getList()){
                     currOrder.add(d);
                 }
             }
-        }else if(requestCode == 2){
+        }else if(requestCode == COFFEE_REQUEST){
             if(resultCode == RESULT_OK) {
                 Order coffeeOrder = (Order)data.getSerializableExtra("coffeeOrder");
                 for (MenuItem c: coffeeOrder.getList()){
                     currOrder.add(c);
                 }
             }
-        }else if(requestCode == 3){
+        }else if(requestCode == CURR_REQUEST){
             if(resultCode == RESULT_OK){
                 Order placedOrder = (Order)data.getSerializableExtra("order");
                 storeOrders.add(placedOrder);
                 currOrder = new Order();
             }
-        } else if(requestCode == 4){
+        } else if(requestCode == STORE_REQUEST){
             if(resultCode == RESULT_OK){
                 storeOrders = (StoreOrders) data.getSerializableExtra("storeOrder");
             }
