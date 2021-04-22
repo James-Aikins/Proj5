@@ -80,7 +80,7 @@ public class DonutActivity extends AppCompatActivity {
         for(Donut d:donuts){
             if(d.getFlavor().equals(donut.getFlavor())){
                 d.setQuantity(d.getQuantity()+quantity);
-                newSubtotal = (Double.parseDouble((String) subtotalNum.getText())) + (donut.getPrice()*quantity);
+                newSubtotal = (Double.parseDouble((String) subtotalNum.getText())) + (donut.getPrice() * quantity);
                 subtotalNum.setText(df.format(newSubtotal));
                 donutsAdapter.notifyDataSetChanged();
                 return;
@@ -88,7 +88,7 @@ public class DonutActivity extends AppCompatActivity {
             }
         }
         donuts.add(donut);
-        newSubtotal = (Double.parseDouble((String) subtotalNum.getText())) + (donut.getPrice()*quantity);
+        newSubtotal = (Double.parseDouble((String) subtotalNum.getText())) + (donut.getPrice() * quantity);
         subtotalNum.setText(df.format(newSubtotal));
         donutsAdapter.notifyDataSetChanged();
     }

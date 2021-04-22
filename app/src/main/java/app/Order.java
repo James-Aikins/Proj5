@@ -87,13 +87,6 @@ public class Order implements Customizable, Serializable {
         orderNumber = nextNum;
         nextNum++;
     }
-    /**
-     * sets the total price of the order
-     * @param price desired price
-     */
-    public void setPrice(double price) {
-        totalPrice = price;
-    }
     public int getOrderNumber(){
         return orderNumber;
     }
@@ -107,6 +100,13 @@ public class Order implements Customizable, Serializable {
             return true;
         }
         return false;
+    }
+
+    /**
+     * clears the order list
+     */
+    public void clear(){
+        itemList.clear();
     }
 }
 
