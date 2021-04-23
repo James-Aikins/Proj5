@@ -11,7 +11,6 @@ public class Order implements Customizable, Serializable {
 
     private int orderNumber;
     private static int nextNum = 1;
-    private double totalPrice;
     private ArrayList<MenuItem> itemList;
 
     /**
@@ -19,7 +18,7 @@ public class Order implements Customizable, Serializable {
      * the order to a blank list
      */
     public Order() {
-        itemList = new ArrayList<MenuItem>();
+        itemList = new ArrayList<>();
         setOrderNumber();
     }
 
@@ -32,7 +31,6 @@ public class Order implements Customizable, Serializable {
     public boolean add(Object obj) {
         if (obj instanceof MenuItem) {
             itemList.add((MenuItem) obj);
-            totalPrice += ((MenuItem) obj).getPrice();
             return true;
         }
         return false;
@@ -48,7 +46,6 @@ public class Order implements Customizable, Serializable {
     public boolean remove(Object obj) {
         if (obj instanceof MenuItem && itemList.contains((MenuItem) obj)) {
             itemList.remove((MenuItem) obj);
-            totalPrice -= ((MenuItem) obj).getPrice();
             return true;
         }
         return false;
@@ -59,7 +56,11 @@ public class Order implements Customizable, Serializable {
      * @return total price
      */
     public double totalPrice() {
-        return totalPrice;
+        double tempPrice = 0;
+        for(MenuItem m: itemList){
+            tempPrice += (m.getPrice()*m.getQuantity());
+        }
+        return tempPrice;
     }
 
     /**
